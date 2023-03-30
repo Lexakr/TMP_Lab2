@@ -15,6 +15,7 @@ namespace TMP_Lab2
 
         public MainWindow(string filename)
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
             MenuCreator newMenu = new(filename);

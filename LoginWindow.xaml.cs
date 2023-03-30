@@ -10,6 +10,7 @@ namespace TMP_Lab2
     {
         public LoginWindow()
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             DataContext = new LoginWindowVM();
         }
@@ -39,7 +40,7 @@ namespace TMP_Lab2
                     }
                 }
             }
-            MessageBox.Show("Неверный логин или пароль");
+            MessageBox.Show("Неверный логин или пароль", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
