@@ -15,6 +15,9 @@ namespace TMP_Lab2
             DataContext = new LoginWindowVM();
         }
 
+        /// <summary>
+        /// Валидация данных авторизации. Загружает список пользователей и при успешной валидации открывает главное окно программы.
+        /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string login = usernameTextBox.Text;
@@ -43,6 +46,9 @@ namespace TMP_Lab2
             MessageBox.Show("Неверный логин или пароль", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        /// <summary>
+        /// Завершение работы программы при нажатии кнопки Отмена.
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

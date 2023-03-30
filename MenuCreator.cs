@@ -7,6 +7,9 @@ using TMP_Lab2;
 
 namespace WpfApp2
 {
+    /// <summary>
+    /// Класс, конструктор которого создаёт меню, структура которого определяется данными, находящимися во внешнем текстовом файле.
+    /// </summary>
     public class MenuCreator
     {
         /// <summary>
@@ -26,41 +29,41 @@ namespace WpfApp2
         /// <param name="filename">Имя текстового файла с меню</param>
         public MenuCreator(string fileName)
         {
-            // Создаем новое меню
             CreatedMenu = new Menu();
 
-            // Читаем все строки файла в массив
             string[] lines = File.ReadAllLines(fileName);
 
-            // Создаем массив для элементов меню
+            // Создаем массив для элементов меню.
             MenuItem[] menuItems = new MenuItem[lines.Length];
 
-            // Обходим все строки файла
+            // Обходим все строки файла.
             for (int i = 0; i < lines.Length; i++)
             {
-                // Разбиваем строку на части по пробелам
+                // Разбиваем строку на части по пробелам.
                 string[] parts = lines[i].Split(' ');
 
-                // Получаем уровень иерархии, название пункта, статус и имя метода
+                // Получаем уровень иерархии, название пункта, статус и имя метода.
                 int level = int.Parse(parts[0]);
                 string name = parts[1];
                 int status = int.Parse(parts[2]);
-                string methodName = (parts.Length > 3) ? parts[3] : null;
+                string? methodName = (parts.Length > 3) ? parts[3] : null;
 
-                // Создаем новый элемент меню и заполняем его данными
-                MenuItem menuItem = new MenuItem();
-                menuItem.Header = name;
-                menuItem.Tag = methodName;
+                // Создаем новый элемент меню по полученным данным.
+                MenuItem menuItem = new()
+                {
+                    Header = name,
+                    Tag = methodName
+                };
 
-                // Сохраняем элемент меню в массиве для последующего использования
+                // Сохраняем элемент в массиве для последующего использования.
                 menuItems[level] = menuItem;
 
-                // Если это корневой пункт меню (уровень 0), то добавляем его в меню
+                // Если это корневой пункт меню (уровень 0), то добавляем его в меню.
                 if (level == 0)
                 {
                     CreatedMenu.Items.Add(menuItem);
                 }
-                // Иначе добавляем его к родительскому элементу меню
+                // Иначе добавляем его к родительскому элементу меню.
                 else
                 {
                     MenuItem parentItem = menuItems[level - 1];
@@ -84,10 +87,10 @@ namespace WpfApp2
                 {
                     menuItem.Click += (sender, e) =>
                     {
-                        // Вызов метода, связанного с пунктом меню из MenuMethods.
+                        // Вызов метода, связанного с пунктом меню из MenuMethods.cs.
                         Type type = typeof(MenuMethods);
                         MethodInfo method = type.GetMethod(methodName);
-                        method.Invoke(null, null);
+                        method?.Invoke(null, null);
                     };
                 }
             }

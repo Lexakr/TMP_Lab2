@@ -5,7 +5,7 @@ namespace TMP_Lab2
     public static class MenuMethods
     {
         /// <summary>
-        /// Метод-заглушка для тестирования 
+        /// Метод-заглушка для тестирования.
         /// </summary>
         public static void Others()
         {
